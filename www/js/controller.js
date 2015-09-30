@@ -25,6 +25,28 @@ angular.module('starter.controllers', [])
 	        }
 	 tap.x = tap.x - canvasPosition.x;
 	 tap.y = tap.y - canvasPosition.y;
+
+	     var img1 = document.getElementById('img1');
+    var img2 = document.getElementById('img2');
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var width = img1.width;
+    var height = img1.height;
+    canvas.width = width;
+    canvas.height = height;
+    var pixels = 4 * width * height;
+    context.drawImage(img1, tap.x, tap.y);
+    var image1 = context.getImageData(0, 0, width, height);
+    var imageData1 = image1.data;
+    context.drawImage(img2, 0, 0);
+    var image2 = context.getImageData(10, 10, width, height);
+    var imageData2 = image2.data;
+    while (pixels--) {
+        imageData1[pixels] = imageData1[pixels] * 0.5 + imageData2[pixels] * 0.5;
+    }
+    image1.data = imageData1;
+    context.putImageData(image1, 0, 0);
+
 	 var alertPopup = $ionicPopup.alert({
 	     title: 'Defect unfixed..!',
 	     template: 'X cordinate'+tap.x+ '\nY cordinate'+tap.y+'.',
@@ -50,27 +72,26 @@ angular.module('starter.controllers', [])
 	    }    
 	  }
 
-window.onload = function () {
-    var img1 = document.getElementById('img1');
-    var img2 = document.getElementById('img2');
-    var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
-    var width = img1.width;
-    var height = img1.height;
-    canvas.width = width;
-    canvas.height = height;
-
-    var pixels = 4 * width * height;
-    context.drawImage(img1, 0, 0);
-    var image1 = context.getImageData(0, 0, width, height);
-    var imageData1 = image1.data;
-    context.drawImage(img2, 0, 0);
-    var image2 = context.getImageData(0, 0, width, height);
-    var imageData2 = image2.data;
-    while (pixels--) {
-        imageData1[pixels] = imageData1[pixels] * 0.5 + imageData2[pixels] * 0.5;
-    }
-    image1.data = imageData1;
-    context.putImageData(image1, 0, 0);
-};
+// window.onload = function () {
+//     var img1 = document.getElementById('img1');
+//     var img2 = document.getElementById('img2');
+//     var canvas = document.getElementById("canvas");
+//     var context = canvas.getContext("2d");
+//     var width = img1.width;
+//     var height = img1.height;
+//     canvas.width = width;
+//     canvas.height = height;
+//     var pixels = 4 * width * height;
+//     context.drawImage(img1, 50, 50);
+//     var image1 = context.getImageData(0, 0, width, height);
+//     var imageData1 = image1.data;
+//     context.drawImage(img2, 0, 0);
+//     var image2 = context.getImageData(10, 10, width, height);
+//     var imageData2 = image2.data;
+//     while (pixels--) {
+//         imageData1[pixels] = imageData1[pixels] * 0.5 + imageData2[pixels] * 0.5;
+//     }
+//     image1.data = imageData1;
+//     context.putImageData(image1, 0, 0);
+// };
 })
