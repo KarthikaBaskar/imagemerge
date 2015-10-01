@@ -1,6 +1,6 @@
 
 angular.module('starter.controllers', [])
-.controller('canvasControlller', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup){
+.controller('canvasControlller', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate){
 	console.log("canvasControlller");
 	function getPosition(element) {
 	    var xPosition = 0;
@@ -14,7 +14,15 @@ angular.module('starter.controllers', [])
 	    return { x: xPosition, y: yPosition };
 	}
 
+
+	  $scope.pdfUrl = "http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf";
+       pdfDelegate
+        .$getByHandle('my-pdf-container')
+        .load($scope.pdfUrl);
+
+
 	$scope.getTouchposition = function(event){
+		$scope.hide = true;
 	var canvasPosition = getPosition(event.gesture.touches[0].target);
 
 	var tap = { x:0, y:0 };
@@ -26,23 +34,28 @@ angular.module('starter.controllers', [])
 	 tap.x = tap.x - canvasPosition.x;
 	 tap.y = tap.y - canvasPosition.y;
 
-	     var img1 = document.getElementById('img1');
+    var img1 = document.getElementById('img1');
     var img2 = document.getElementById('img2');
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
+    
     var width = img1.width;
     var height = img1.height;
     canvas.width = width;
     canvas.height = height;
     var pixels = 4 * width * height;
-    context.drawImage(img1, tap.x, tap.y);
+    context.drawImage(img1, 0, 0);
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
-    context.drawImage(img2, 0, 0);
-    var image2 = context.getImageData(10, 10, width, height);
+    context.drawImage(img2, tap.x, tap.y);
+  //   	 var alertPopup = $ionicPopup.alert({
+	 //     title: 'Defect unfixed..!',
+	 //     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas id="signatureCanvas" width="{{height}}" height="{{width}}"></canvas></div>',
+	 // });
+    var image2 = context.getImageData(0, 0, width, height);
     var imageData2 = image2.data;
     while (pixels--) {
-        imageData1[pixels] = imageData1[pixels] * 0.5 + imageData2[pixels] * 0.5;
+        imageData1[pixels] = imageData2[pixels] * 0.5;
     }
     image1.data = imageData1;
     context.putImageData(image1, 0, 0);
@@ -61,8 +74,8 @@ angular.module('starter.controllers', [])
 	    if(zoomed){// toggle zoom in
 	      var tap = {x:0, y:0};
 	      var position = $scope.getTouchposition(event);
-	      $ionicScrollDelegate.zoomBy(1.8, true, position.x, position.y);
-	      zoomed = !zoomed;
+	      // $ionicScrollDelegate.zoomBy(1.8, true, position.x, position.y);
+	      // zoomed = !zoomed;
 	      //console.log(ionic.tap.pointerCoord(event));
 
 	      console.log(position.x);
