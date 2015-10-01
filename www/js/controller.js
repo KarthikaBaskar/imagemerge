@@ -22,17 +22,17 @@ angular.module('starter.controllers', [])
 
 
 	$scope.getTouchposition = function(event){
-		$scope.hide = true;
-	var canvasPosition = getPosition(event.gesture.touches[0].target);
+	$scope.hide = true;
+	// var canvasPosition = getPosition(event.gesture.touches[0].target);
 
-	var tap = { x:0, y:0 };
-	        if(event.gesture.touches.length>0){
-	        tt = event.gesture.touches[0];
-	        tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
-	        tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
-	        }
-	 tap.x = tap.x - canvasPosition.x;
-	 tap.y = tap.y - canvasPosition.y;
+	// var tap = { x:0, y:0 };
+	//         if(event.gesture.touches.length>0){
+	//         tt = event.gesture.touches[0];
+	//         tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
+	//         tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
+	//         }
+	//  tap.x = tap.x - canvasPosition.x;
+	//  tap.y = tap.y - canvasPosition.y;
 
   //  	 var alertPopup = $ionicPopup.alert({
 	 //     title: 'Defect unfixed..!',
@@ -59,7 +59,7 @@ angular.module('starter.controllers', [])
     context.drawImage(img1, 0, 0);
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
-    context.drawImage(img2, tap.x, tap.y);
+    context.drawImage(img2, 100, 250);
    
     var image2 = context.getImageData(0, 0, width, height);
     var imageData2 = image2.data;
@@ -69,11 +69,11 @@ angular.module('starter.controllers', [])
     image1.data = imageData1;
     context.putImageData(image1, 0, 0);
 
-	 var alertPopup = $ionicPopup.alert({
-	     title: 'Defect unfixed..!',
-	     template: 'X cordinate'+tap.x+ '\nY cordinate'+tap.y+'.',
-	 });
-	 return {x: tap.x, y: tap.y};
+	 // var alertPopup = $ionicPopup.alert({
+	 //     title: 'Defect unfixed..!',
+	 //     template: 'X cordinate'+tap.x+ '\nY cordinate'+tap.y+'.',
+	 // });
+	 // return {x: tap.x, y: tap.y};
        } else {
          console.log('You are not sure');
        }
