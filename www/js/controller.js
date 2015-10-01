@@ -38,8 +38,7 @@ angular.module('starter.controllers', [])
 	 //     title: 'Defect unfixed..!',
 	 //     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas ng-signature-pad="signature" width="210"></canvas></div>',
 	 // });
-
-
+	var img1 = document.getElementById('img1');
      var confirmPopup = $ionicPopup.confirm({
        title: 'Sign here',
        template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas id="signatureCanvas" ng-signature-pad="signature" width="210"></canvas></div>',
@@ -47,11 +46,11 @@ angular.module('starter.controllers', [])
      confirmPopup.then(function(res) {
        if(res) {
 				
-	var img1 = document.getElementById('img1');
+	
     var img2 = document.getElementById('signatureCanvas');
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
-    console.log(img2);
+    console.log(img1);
     var width = img1.width;
     var height = img1.height;
     canvas.width = width;
@@ -128,26 +127,24 @@ angular.module('starter.controllers', [])
 // };
 })
 // File transfer controller
-.controller('fileController', function($scope, $timeout, $cordovaFileTransfer ){
+// .controller('fileController', function($scope, $timeout, $cordovaFileTransfer ){
 
-	document.addEventListener('deviceready', function () {
+//     var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
+//     var targetPath = cordova.file.documentsDirectory + "testImage.png";
+//     var trustHosts = true
+//     var options = {};
 
-    var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
-    var targetPath = cordova.file.documentsDirectory + "testImage.png";
-    var trustHosts = true
-    var options = {};
+//     document.addEventListener('deviceready', function () {
 
-    document.addEventListener('deviceready', function () {
+//     $cordovaFileTransfer.upload(server, filePath, options)
+//       .then(function(result) {
+//         // Success!
+//       }, function(err) {
+//         // Error
+//       }, function (progress) {
+//         // constant progress updates
+//       });
 
-    $cordovaFileTransfer.upload(server, filePath, options)
-      .then(function(result) {
-        // Success!
-      }, function(err) {
-        // Error
-      }, function (progress) {
-        // constant progress updates
-      });
-
-	  }, false);
+// 	  }, false);
     
-})
+// })
