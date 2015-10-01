@@ -128,9 +128,9 @@ angular.module('starter.controllers', [])
 // };
 })
 // File transfer controller
-.controller('fileController', function($scope, $timeout, $cordovaFileTransfer ){
+.controller('fileController', function($scope, $cordovaFileTransferProvider , $timeout, $cordovaFileTransfer,canvasController ){
 
-	document.addEventListener('deviceready', function () {
+
 
     var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
     var targetPath = cordova.file.documentsDirectory + "testImage.png";
@@ -150,4 +150,4 @@ angular.module('starter.controllers', [])
 
 	  }, false);
     
-})
+});
