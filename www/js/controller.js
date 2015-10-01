@@ -1,6 +1,6 @@
 
 angular.module('starter.controllers', [])
-.controller('canvasControlller', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate){
+.controller('canvasController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate){
 	console.log("canvasControlller");
 	function getPosition(element) {
 	    var xPosition = 0;
@@ -107,4 +107,43 @@ angular.module('starter.controllers', [])
 //     image1.data = imageData1;
 //     context.putImageData(image1, 0, 0);
 // };
+})
+// File transfer controller
+.controller('fileController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup, pdfDelegate, $ionicLoading ){
+
+	/*Load methid to add document*/
+	$scope.load = function() {
+	    $ionicLoading.show({
+	      template: 'Loading...'
+	    });
+	    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
+	        fs.root.getDirectory(
+	            "ExampleProject",
+	            {
+	                create: false
+	            },
+	            function(dirEntry) {
+	                dirEntry.getFile(
+	                    "test.png", 
+	                    {
+	                        create: false, 
+	                        exclusive: false
+	                    }, 
+	                    function gotFileEntry(fe) {
+	                        $ionicLoading.hide();
+	                        $scope.imgFile = fe.toURL();
+	                    }, 
+	                    function(error) {
+	                        $ionicLoading.hide();
+	                        console.log("Error getting file");
+	                    }
+	                );
+	            }
+	        );
+	    },
+	    function() {
+	        $ionicLoading.hide();
+	        console.log("Error requesting filesystem");
+	    });
+	}
 })
