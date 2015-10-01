@@ -91,17 +91,14 @@ angular.module('starter.controllers', [])
 
 
 	}
-
-	console.log(canvas1);
 	var draggable = document.getElementById('canvas1');
-  draggable.addEventListener('touchmove', function(event) {
-    var touch = event.targetTouches[0];
- 
-    // Place element where the finger is
-    draggable.style.left = touch.pageX + 'px';
-    draggable.style.top = touch.pageY + 'px';
-    event.preventDefault();
-  }, false);
+	draggable.addEventListener('touchmove', function(event) {
+	    var touch = event.targetTouches[0];
+	    // Place element where the finger is
+	    draggable.style.left = touch.pageX-100 + 'px';
+	    draggable.style.top = touch.pageY-100 + 'px';
+	    event.preventDefault();
+  	}, false);
 
 
 	//this function gets called from the html template
