@@ -50,25 +50,31 @@ angular.module('starter.controllers', [])
     var img2 = document.getElementById('signatureCanvas');
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
+
+    var canvas1 = document.getElementById("canvas1");
+    var context1 = canvas1.getContext("2d");
+
     console.log(img1);
     var width = img1.width;
     var height = img1.height;
     canvas.width = width;
     canvas.height = height;
     var pixels = 4 * width * height;
+
     context.drawImage(img1, 0, 0);
+
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
-    context.drawImage(img2, 100, 250);
-   
-    var image2 = context.getImageData(0, 0, width, height);
+    image1.data = imageData1;
+    context.putImageData(image1, 0, 0);
+
+    context1.drawImage(img2, 0, 0);
+    var image2 = context1.getImageData(0, 0, width, height);
     var imageData2 = image2.data;
     // while (pixels--) {
     //     imageData1[pixels] = imageData2[pixels] * 0.5;
     // }
-    image1.data = imageData1;
-    context.putImageData(image1, 0, 0);
-    context.putImageData(image2, 0, 0);
+    context1.putImageData(image2, 0, 0);
 
 	 // var alertPopup = $ionicPopup.alert({
 	 //     title: 'Defect unfixed..!',
@@ -85,6 +91,18 @@ angular.module('starter.controllers', [])
 
 
 	}
+
+	console.log(canvas1);
+	var draggable = document.getElementById('canvas1');
+  draggable.addEventListener('touchmove', function(event) {
+    var touch = event.targetTouches[0];
+ 
+    // Place element where the finger is
+    draggable.style.left = touch.pageX + 'px';
+    draggable.style.top = touch.pageY + 'px';
+    event.preventDefault();
+  }, false);
+
 
 	//this function gets called from the html template
 	var zoomed = true;
