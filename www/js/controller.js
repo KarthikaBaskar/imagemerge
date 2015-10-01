@@ -48,10 +48,10 @@ angular.module('starter.controllers', [])
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
     context.drawImage(img2, tap.x, tap.y);
-  //   	 var alertPopup = $ionicPopup.alert({
-	 //     title: 'Defect unfixed..!',
-	 //     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas id="signatureCanvas" width="{{height}}" height="{{width}}"></canvas></div>',
-	 // });
+    	 var alertPopup = $ionicPopup.alert({
+	     title: 'Defect unfixed..!',
+	     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas ng-signature-pad="signature" width="210"></canvas></div>',
+	 });
     var image2 = context.getImageData(0, 0, width, height);
     var imageData2 = image2.data;
     while (pixels--) {
