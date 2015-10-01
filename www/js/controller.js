@@ -34,11 +34,24 @@ angular.module('starter.controllers', [])
 	 tap.x = tap.x - canvasPosition.x;
 	 tap.y = tap.y - canvasPosition.y;
 
-    var img1 = document.getElementById('img1');
-    var img2 = document.getElementById('img2');
+  //  	 var alertPopup = $ionicPopup.alert({
+	 //     title: 'Defect unfixed..!',
+	 //     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas ng-signature-pad="signature" width="210"></canvas></div>',
+	 // });
+
+
+     var confirmPopup = $ionicPopup.confirm({
+       title: 'Sign here',
+       template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas id="signatureCanvas" ng-signature-pad="signature" width="210"></canvas></div>',
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+				
+	var img1 = document.getElementById('img1');
+    var img2 = document.getElementById('signatureCanvas');
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
-    
+    console.log(img2);
     var width = img1.width;
     var height = img1.height;
     canvas.width = width;
@@ -48,10 +61,7 @@ angular.module('starter.controllers', [])
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
     context.drawImage(img2, tap.x, tap.y);
-    	 var alertPopup = $ionicPopup.alert({
-	     title: 'Defect unfixed..!',
-	     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas ng-signature-pad="signature" width="210"></canvas></div>',
-	 });
+   
     var image2 = context.getImageData(0, 0, width, height);
     var imageData2 = image2.data;
     while (pixels--) {
@@ -65,6 +75,15 @@ angular.module('starter.controllers', [])
 	     template: 'X cordinate'+tap.x+ '\nY cordinate'+tap.y+'.',
 	 });
 	 return {x: tap.x, y: tap.y};
+       } else {
+         console.log('You are not sure');
+       }
+     });
+   
+
+
+
+
 	}
 
 	//this function gets called from the html template
@@ -78,7 +97,7 @@ angular.module('starter.controllers', [])
 	      // zoomed = !zoomed;
 	      //console.log(ionic.tap.pointerCoord(event));
 
-	      console.log(position.x);
+	      //console.log(position.x);
 	    }else{ // toggle zoom out
 	     $ionicScrollDelegate.zoomTo(1, true);
 	      zoomed = !zoomed;
