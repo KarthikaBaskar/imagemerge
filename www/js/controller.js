@@ -63,11 +63,12 @@ angular.module('starter.controllers', [])
    
     var image2 = context.getImageData(0, 0, width, height);
     var imageData2 = image2.data;
-    while (pixels--) {
-        imageData1[pixels] = imageData2[pixels] * 0.5;
-    }
+    // while (pixels--) {
+    //     imageData1[pixels] = imageData2[pixels] * 0.5;
+    // }
     image1.data = imageData1;
     context.putImageData(image1, 0, 0);
+    context.putImageData(image2, 0, 0);
 
 	 // var alertPopup = $ionicPopup.alert({
 	 //     title: 'Defect unfixed..!',
