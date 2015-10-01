@@ -1,6 +1,6 @@
 
 angular.module('starter.controllers', [])
-.controller('canvasController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate){
+.controller('canvasController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate, $cordovaFileTransfer){
 	console.log("canvasControlller");
 	function getPosition(element) {
 	    var xPosition = 0;
@@ -104,6 +104,26 @@ angular.module('starter.controllers', [])
 	    }    
 	  }
 
+	 $scope.fileupload = function(){
+	 	console.log('asdasd');
+	  	var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
+	    var targetPath = cordova.file.documentsDirectory + "testImage.png";
+	    var trustHosts = true
+	    var options = {};
+
+	    document.addEventListener('deviceready', function () {
+
+	    $cordovaFileTransfer.upload(server, filePath, options)
+	      .then(function(result) {
+	        // Success!
+	      }, function(err) {
+	        // Error
+	      }, function (progress) {
+	        // constant progress updates
+	      });
+
+		  }, false);
+	};
 // window.onload = function () {
 //     var img1 = document.getElementById('img1');
 //     var img2 = document.getElementById('img2');
@@ -128,26 +148,10 @@ angular.module('starter.controllers', [])
 // };
 })
 // File transfer controller
-.controller('fileController', function($scope, $cordovaFileTransferProvider , $timeout, $cordovaFileTransfer,canvasController ){
+/*.controller('fileController', function($scope , $timeout, $cordovaFileTransfer ){
 
 
 
-    var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
-    var targetPath = cordova.file.documentsDirectory + "testImage.png";
-    var trustHosts = true
-    var options = {};
-
-    document.addEventListener('deviceready', function () {
-
-    $cordovaFileTransfer.upload(server, filePath, options)
-      .then(function(result) {
-        // Success!
-      }, function(err) {
-        // Error
-      }, function (progress) {
-        // constant progress updates
-      });
-
-	  }, false);
     
-});
+    
+});*/
