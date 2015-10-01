@@ -29,3 +29,25 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers','pdf','ng
     } else { console.log( ' no cordova plugins available ' ); }
   });
 })
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+ 
+    .state('app', {
+    url: "/app",
+    templateUrl: "index.html",
+    controller: 'canvasController'
+  })
+ 
+ 
+  .state('app.browse', {
+    url: "/browse",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/browse.html",
+        controller: 'BrowseCtrl'
+      }
+    }
+  })
+ 
+  $urlRouterProvider.otherwise('/app/browse');
+});
