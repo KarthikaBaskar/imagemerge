@@ -1,6 +1,5 @@
-
 angular.module('starter.controllers', [])
-.controller('canvasController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate, $cordovaFileTransfer){
+.controller('canvasController', function($scope, $state, $stateParams, $http, $cordovaFileTransfer, $location, $ionicModal, $ionicScrollDelegate, $ionicPopup, pdfDelegate){
 	console.log("canvasControlller");
 	function getPosition(element) {
 	    var xPosition = 0;
@@ -12,37 +11,35 @@ angular.module('starter.controllers', [])
 	        element = element.offsetParent;
 	    }
 	    return { x: xPosition, y: yPosition };
-	}
+	};
 
 
-	  $scope.pdfUrl = "http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf";
-       pdfDelegate
-        .$getByHandle('my-pdf-container')
-        .load($scope.pdfUrl);
+  	// $scope.pdfUrl = "http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf";
+    pdfDelegate.$getByHandle('my-pdf-container').load($scope.pdfUrl);
 
 
 	$scope.getTouchposition = function(event){
-	$scope.hide = true;
-	// var canvasPosition = getPosition(event.gesture.touches[0].target);
+		$scope.hide = true;
+		// var canvasPosition = getPosition(event.gesture.touches[0].target);
 
-	// var tap = { x:0, y:0 };
-	//         if(event.gesture.touches.length>0){
-	//         tt = event.gesture.touches[0];
-	//         tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
-	//         tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
-	//         }
-	//  tap.x = tap.x - canvasPosition.x;
-	//  tap.y = tap.y - canvasPosition.y;
+		// var tap = { x:0, y:0 };
+		//         if(event.gesture.touches.length>0){
+		//         tt = event.gesture.touches[0];
+		//         tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
+		//         tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
+		//         }
+		//  tap.x = tap.x - canvasPosition.x;
+		//  tap.y = tap.y - canvasPosition.y;
 
-  //  	 var alertPopup = $ionicPopup.alert({
-	 //     title: 'Defect unfixed..!',
-	 //     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas ng-signature-pad="signature" width="210"></canvas></div>',
-	 // });
-	var img1 = document.getElementById('img1');
-     var confirmPopup = $ionicPopup.confirm({
-       title: 'Sign here',
-       template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas id="signatureCanvas" ng-signature-pad="signature" width="210"></canvas></div>',
-     });
+	  //  	 var alertPopup = $ionicPopup.alert({
+		 //     title: 'Defect unfixed..!',
+		 //     template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas ng-signature-pad="signature" width="210"></canvas></div>',
+		 // });
+		var img1 = document.getElementById('img1');
+	     var confirmPopup = $ionicPopup.confirm({
+	       title: 'Sign here',
+	       template: '<div id="sign" style="width: 90%;height: 90%;background-color: #fff; margin: 10px;"><canvas id="signatureCanvas" ng-signature-pad="signature" width="210"></canvas></div>',
+	     });
      confirmPopup.then(function(res) {
        if(res) {
 				
@@ -104,26 +101,8 @@ angular.module('starter.controllers', [])
 	    }    
 	  }
 
-	 $scope.fileupload = function(){
-	 	console.log('asdasd');
+	$scope.fileupload = function(){
 	 	$state.go('app.browse');
-	  	// var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
-	   //  var targetPath = cordova.file.documentsDirectory + "testImage.png";
-	   //  var trustHosts = true
-	   //  var options = {};
-
-	   //  document.addEventListener('deviceready', function () {
-
-	   //  $cordovaFileTransfer.upload(server, filePath, options)
-	   //    .then(function(result) {
-	   //      // Success!
-	   //    }, function(err) {
-	   //      // Error
-	   //    }, function (progress) {
-	   //      // constant progress updates
-	   //    });
-
-		  // }, false);
 	};
 // window.onload = function () {
 //     var img1 = document.getElementById('img1');
@@ -147,131 +126,4 @@ angular.module('starter.controllers', [])
 //     image1.data = imageData1;
 //     context.putImageData(image1, 0, 0);
 // };
-})
-.controller('BrowseCtrl', function($window, $ionicPlatform, $rootScope, $scope, $ionicScrollDelegate, AudioSvc, $ionicModal) {
-	console.log("Brose Controller");
-    $scope.files = [];
- 
-    $ionicModal.fromTemplateUrl('templates/player.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
- 
-    $rootScope.hidePlayer = function() {
-      $scope.modal.hide();
-    };
- 
-    $rootScope.player = function() {
-      $scope.modal.show();
-    };
- 
-    $ionicPlatform.ready(function() {
- 
-      $rootScope.show('Accessing Filesystem.. Please wait');
-      $window.requestFileSystem($window.LocalFileSystem.PERSISTENT, 0, function(fs) {
-          //console.log("fs", fs);
- 
-          var directoryReader = fs.root.createReader();
- 
-          directoryReader.readEntries(function(entries) {
-              var arr = [];
-              processEntries(entries, arr); // arr is pass by refrence
-              $scope.files = arr;
-              $rootScope.hide();
-            },
-            function(error) {
-              console.log(error);
-            });
-        },
-        function(error) {
-          console.log(error);
-        });
- 
-      $scope.showSubDirs = function(file) {
- 
-        if (file.isDirectory || file.isUpNav) {
-          if (file.isUpNav) {
-            processFile(file.nativeURL.replace(file.actualName + '/', ''));
-          } else {
-            processFile(file.nativeURL);
-          }
-        } else {
-          // if (hasExtension(file.name)) {
-            
-          // } else {
-          //   $rootScope.toggle('Oops! We cannot play this file :/', 3000);
-          // }
- 
-        }
- 
-      }
- 
-      function fsResolver(url, callback) {
-        $window.resolveLocalFileSystemURL(url, callback);
-      }
- 
-      function processFile(url) {
-        fsResolver(url, function(fs) {
-          //console.log(fs);
-          var directoryReader = fs.createReader();
- 
-          directoryReader.readEntries(function(entries) {
-              if (entries.length > 0) {
-                var arr = [];
-                // push the path to go one level up
-                if (fs.fullPath !== '/') {
-                  arr.push({
-                    id: 0,
-                    name: '.. One level up',
-                    actualName: fs.name,
-                    isDirectory: false,
-                    isUpNav: true,
-                    nativeURL: fs.nativeURL,
-                    fullPath: fs.fullPath
-                  });
-                }
-                processEntries(entries, arr);
-                $scope.$apply(function() {
-                  $scope.files = arr;
-                });
- 
-                $ionicScrollDelegate.scrollTop();
-              } else {
-                $rootScope.toggle(fs.name + ' folder is empty!', 2000);
-              }
-            },
-            function(error) {
-              console.log(error);
-            });
-        });
-      }
- 
-      // function hasExtension(fileName) {
-      //   var exts = ['.mp3', '.m4a', '.ogg', '.mp4', '.aac'];
-      //   return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
-      // }
- 
-      function processEntries(entries, arr) {
- 
-        for (var i = 0; i < entries.length; i++) {
-          var e = entries[i];
- 
-          // do not push/show hidden files or folders
-          if (e.name.indexOf('.') !== 0) {
-            arr.push({
-              id: i + 1,
-              name: e.name,
-              isUpNav: false,
-              isDirectory: e.isDirectory,
-              nativeURL: e.nativeURL,
-              fullPath: e.fullPath
-            });
-          }
-        }
-        return arr;
-      }
- 
-    });
-  }
-)
+});
