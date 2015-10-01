@@ -109,41 +109,26 @@ angular.module('starter.controllers', [])
 // };
 })
 // File transfer controller
-.controller('fileController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup, pdfDelegate, $ionicLoading ){
+.controller('fileController', function($scope, $timeout, $cordovaFileTransfer ){
 
-	/*Load methid to add document*/
-	$scope.load = function() {
-	    $ionicLoading.show({
-	      template: 'Loading...'
-	    });
-	    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
-	        fs.root.getDirectory(
-	            "ExampleProject",
-	            {
-	                create: false
-	            },
-	            function(dirEntry) {
-	                dirEntry.getFile(
-	                    "test.png", 
-	                    {
-	                        create: false, 
-	                        exclusive: false
-	                    }, 
-	                    function gotFileEntry(fe) {
-	                        $ionicLoading.hide();
-	                        $scope.imgFile = fe.toURL();
-	                    }, 
-	                    function(error) {
-	                        $ionicLoading.hide();
-	                        console.log("Error getting file");
-	                    }
-	                );
-	            }
-	        );
-	    },
-	    function() {
-	        $ionicLoading.hide();
-	        console.log("Error requesting filesystem");
-	    });
-	}
+	document.addEventListener('deviceready', function () {
+
+    var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
+    var targetPath = cordova.file.documentsDirectory + "testImage.png";
+    var trustHosts = true
+    var options = {};
+
+    document.addEventListener('deviceready', function () {
+
+    $cordovaFileTransfer.upload(server, filePath, options)
+      .then(function(result) {
+        // Success!
+      }, function(err) {
+        // Error
+      }, function (progress) {
+        // constant progress updates
+      });
+
+	  }, false);
+    
 })
