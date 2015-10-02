@@ -9,6 +9,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers','pdf','ng
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -18,7 +20,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers','pdf','ng
     if (window.cordova) {
         //quick check for presence of ngCordovaFile plugin
         console.log('starting cordovaFile check');
-        console.log($cordovaFile);
+        // console.log($cordovaFile);
         //check for the docs directory suing File plugin
         $cordovaFile.checkDir(cordova.file.documentsDirectory, "")
         .then(function(success) {

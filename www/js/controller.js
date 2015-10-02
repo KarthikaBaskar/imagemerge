@@ -123,6 +123,35 @@ angular.module('starter.controllers', [])
 	 	console.log('asdasd');
 	 	$state.go('browse');
 	};
+  $scope.merge = function(event){
+    console.log("Merge");
+   // 
+    var img1 = document.getElementById('canvas');
+    var img2 = document.getElementById('pdf');
+    console.log("Image");
+    console.log(img1);
+    console.log("Image");
+    console.log(img2);
+    var context1 = img1.getContext("2d");
+    var context2 = img2.getContext("2d");
+    var width = img1.width;
+    var height = img1.height;
+    canvas.width = width;
+    canvas.height = height;
+    var pixels = 4 * width * height;
+    context.drawImage(image1, 50, 50);
+    var image1 = context.getImageData(0, 0, width, height);
+    var imageData1 = image1.data;
+    context.drawImage(img2, 0, 0);
+    var image2 = context.getImageData(10, 10, width, height);
+    var imageData2 = image2.data;
+    while (pixels--) {
+        imageData1[pixels] = imageData1[pixels] * 0.5 + imageData2[pixels] * 0.5;
+    }
+    image1.data = imageData1;
+    context.putImageData(image1, 0, 0);
+
+  }
 // window.onload = function () {
 //     var img1 = document.getElementById('img1');
 //     var img2 = document.getElementById('img2');
@@ -166,7 +195,20 @@ angular.module('starter.controllers', [])
     // };
  
     $ionicPlatform.ready(function() {
- 
+      /*function for file transfer*/
+      console.log(cordova.file);
+
+     $cordovaFile.getFreeDiskSpace()
+      .then(function (success) {
+        console.log("file directory success");
+         // success in kilobytes
+      }, function (error) {
+          // error
+          console.log("file directory success");
+      });
+
+
+
       $rootScope.show('Accessing Filesystem.. Please wait');
       $window.requestFileSystem($window.LocalFileSystem.PERSISTENT, 0, function(fs) {
           //console.log("fs", fs);

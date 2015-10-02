@@ -36,13 +36,13 @@
       <div>
         <button class="button" ng-click="upload()">Upload</button>
         <button class="button" ng-click="getTouchposition()">Add sign</button>
+        <button class="button" ng-click="merge()">MERGE</button>
       </div>
       <!-- <img src="img/ionic.png"  on-double-tap="touchFunction()" id="img1"> -->
       <!-- <img src="http://n2.transparent.sg:3000/assets/signatures/4195694393tasignimage.jpg" style="width: 20%;" id="img2" > -->
-<!--       <iframe ng-src="http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf" on-double-tap="touchFunction()" style="width: 100%; height: 250px"></iframe> -->
-<ion-scroll direction="xy" style="margin-top: 20%;display:inline;top:42px;right:0;bottom:0;left:0;">
-      <pdf-viewer delegate-handle="my-pdf-container"  url="pdfUrl"
-      ></pdf-viewer>
+      <!--       <iframe ng-src="http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf" on-double-tap="touchFunction()" style="width: 100%; height: 250px"></iframe> -->
+      <ion-scroll direction="xy" style="margin-top: 20%;display:inline;top:42px;right:0;bottom:0;left:0;">
+      <pdf-viewer delegate-handle="my-pdf-container"  url="pdfUrl" id="pdf" ></pdf-viewer>
     </ion-scroll>
         <p ng-hide="true">with sigh<br><canvas id="canvas"></canvas></p>
         <p>with sigh<br><canvas id="canvas1"></canvas></p>
