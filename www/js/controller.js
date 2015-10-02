@@ -9,20 +9,21 @@ angular.module('starter.controllers', [])
 	    while(element) {
 	        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
 	        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-	        element = element.offsetParent;
+          element = element.offsetParent;
 	    }
 	    return { x: xPosition, y: yPosition };
 	}
 
 
-	  $scope.pdfUrl = "http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf";
+	  //$scope.pdfUrl = "http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf";
+    $scope.pdfUrl = "img/angularjs_tutorial.pdf";
        pdfDelegate
         .$getByHandle('my-pdf-container')
         .load($scope.pdfUrl);
 
 
 	$scope.getTouchposition = function(event){
-	$scope.hide = true;
+	// $scope.hide = true;
 	// var canvasPosition = getPosition(event.gesture.touches[0].target);
 
 	// var tap = { x:0, y:0 };
@@ -91,6 +92,24 @@ angular.module('starter.controllers', [])
 
 
 	}
+
+      $scope.openNextPage = function(){
+      pdfDelegate.$getByHandle('my-pdf-container').next();
+    };
+
+    $scope.openPrevPage = function(){
+      pdfDelegate.$getByHandle('my-pdf-container').prev();
+    };
+
+    $scope.zoomIn = function(){
+      pdfDelegate.$getByHandle('my-pdf-container').zoomIn();
+    };
+
+    $scope.zoomOut = function(){
+     pdfDelegate.$getByHandle('my-pdf-container').zoomOut();
+    };
+
+
 	var draggable = document.getElementById('canvas1');
 	draggable.addEventListener('touchmove', function(event) {
 	    var touch = event.targetTouches[0];
@@ -123,34 +142,26 @@ angular.module('starter.controllers', [])
 	 	console.log('asdasd');
 	 	$state.go('browse');
 	};
+
   $scope.merge = function(event){
     console.log("Merge");
-   // 
-    var img1 = document.getElementById('canvas');
-    var img2 = document.getElementById('pdf');
-    console.log("Image");
-    console.log(img1);
-    console.log("Image");
-    console.log(img2);
-    var context1 = img1.getContext("2d");
-    var context2 = img2.getContext("2d");
+    $scope.hide = true;
+    var img2 = document.getElementById('canvas1');
+    var img1 = document.getElementById('img1');
+    var canvasPosition = getPosition(img2);
+    console.log(canvasPosition.x);
+    console.log(canvasPosition.y);
+    var canvas = document.getElementById("canvas3");
+    var context = canvas.getContext("2d");
     var width = img1.width;
     var height = img1.height;
     canvas.width = width;
     canvas.height = height;
     var pixels = 4 * width * height;
-    context.drawImage(image1, 50, 50);
+    context.drawImage(img1, 0, 0);
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
-    context.drawImage(img2, 0, 0);
-    var image2 = context.getImageData(10, 10, width, height);
-    var imageData2 = image2.data;
-    while (pixels--) {
-        imageData1[pixels] = imageData1[pixels] * 0.5 + imageData2[pixels] * 0.5;
-    }
-    image1.data = imageData1;
-    context.putImageData(image1, 0, 0);
-
+    context.drawImage(img2, canvasPosition.x, canvasPosition.y);
   }
 // window.onload = function () {
 //     var img1 = document.getElementById('img1');

@@ -4,4 +4,5 @@
     /* overflow: auto; */
 }
 
-#canvas1 {background-color:#f00;width: 46%;height: 13%;position:absolute;bottom: 65%}
+#canvas1 {background-color:#FFFFFF;width: 46%;height: 13%;position:absolute;bottom: 65%;border: 1px solid #251A1A;}
+    
