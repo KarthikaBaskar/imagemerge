@@ -114,8 +114,8 @@ angular.module('starter.controllers', [])
 	draggable.addEventListener('touchmove', function(event) {
 	    var touch = event.targetTouches[0];
 	    // Place element where the finger is
-	    draggable.style.left = touch.pageX-100 + 'px';
-	    draggable.style.top = touch.pageY-100 + 'px';
+	    draggable.style.left = touch.pageX-80 + 'px';
+	    draggable.style.top = touch.pageY-80 + 'px';
       console.log(draggable.style.left);
 	    event.preventDefault();
   	}, false);
