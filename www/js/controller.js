@@ -116,6 +116,7 @@ angular.module('starter.controllers', [])
 	    // Place element where the finger is
 	    draggable.style.left = touch.pageX-100 + 'px';
 	    draggable.style.top = touch.pageY-100 + 'px';
+      console.log(draggable.style.left);
 	    event.preventDefault();
   	}, false);
 
@@ -161,7 +162,8 @@ angular.module('starter.controllers', [])
     context.drawImage(img1, 0, 0);
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
-    context.drawImage(img2, canvasPosition.x, canvasPosition.y);
+    context.drawImage(img2, canvasPosition.x-91, canvasPosition.y-91);
+
   }
 // window.onload = function () {
 //     var img1 = document.getElementById('img1');
