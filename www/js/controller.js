@@ -116,7 +116,7 @@ angular.module('starter.controllers', [])
 	    // Place element where the finger is
 	    draggable.style.left = touch.pageX-80 + 'px';
 	    draggable.style.top = touch.pageY-80 + 'px';
-      console.log(draggable.style.left);
+      console.log(draggable.style.left+''+draggable.style.top);
 	    event.preventDefault();
   	}, false);
 
@@ -162,7 +162,9 @@ angular.module('starter.controllers', [])
     context.drawImage(img1, 0, 0);
     var image1 = context.getImageData(0, 0, width, height);
     var imageData1 = image1.data;
-    context.drawImage(img2, canvasPosition.x-91, canvasPosition.y-91);
+    context.moveTo(canvasPosition.x-98,canvasPosition.y-280);
+    context.lineTo(canvasPosition.x,canvasPosition.y);
+    context.drawImage(img2,0, 0 );
 
   }
 // window.onload = function () {
