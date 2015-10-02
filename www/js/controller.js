@@ -1,7 +1,7 @@
 
 angular.module('starter.controllers', [])
-.controller('canvasController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate, $cordovaFileTransfer){
-	console.log("canvasControlller");
+.controller('canvasController', function($scope, $ionicModal, $state, $stateParams, $http , $location, $ionicScrollDelegate, $ionicPopup,pdfDelegate, $cordovaFileTransfer,$cordovaFile){
+	//console.log("canvasControlller");
 	function getPosition(element) {
 	    var xPosition = 0;
 	    var yPosition = 0;
@@ -55,7 +55,7 @@ angular.module('starter.controllers', [])
     var canvas1 = document.getElementById("canvas1");
     var context1 = canvas1.getContext("2d");
 
-    console.log(img1);
+    //console.log(img1);
     var width = img1.width;
     var height = img1.height;
     canvas.width = width;
@@ -116,7 +116,7 @@ angular.module('starter.controllers', [])
 	    // Place element where the finger is
 	    draggable.style.left = touch.pageX-80 + 'px';
 	    draggable.style.top = touch.pageY-80 + 'px';
-      console.log(draggable.style.left+''+draggable.style.top);
+      //console.log(draggable.style.left+''+draggable.style.top);
 	    event.preventDefault();
   	}, false);
 
@@ -124,7 +124,7 @@ angular.module('starter.controllers', [])
 	//this function gets called from the html template
 	var zoomed = true;
 	  $scope.touchFunction = function(){
-	  	console.log("zoomFunction");
+	  	//console.log("zoomFunction");
 	    if(zoomed){// toggle zoom in
 	      var tap = {x:0, y:0};
 	      var position = $scope.getTouchposition(event);
@@ -141,7 +141,7 @@ angular.module('starter.controllers', [])
 
 	 $scope.fileupload = function(){
 	 	console.log('asdasd');
-	 	$state.go('browse');
+	 	$state.go('app.browse');
 	};
 
   $scope.merge = function(event){
@@ -150,8 +150,8 @@ angular.module('starter.controllers', [])
     var img2 = document.getElementById('canvas1');
     var img1 = document.getElementById('img1');
     var canvasPosition = getPosition(img2);
-    console.log(canvasPosition.x);
-    console.log(canvasPosition.y);
+    //console.log(canvasPosition.x);
+    //console.log(canvasPosition.y);
     var canvas = document.getElementById("canvas3");
     var context = canvas.getContext("2d");
     var width = img1.width;
@@ -210,9 +210,8 @@ angular.module('starter.controllers', [])
     // };
  
     $ionicPlatform.ready(function() {
-      /*function for file transfer*/
+      
       console.log(cordova.file);
-
      $cordovaFile.getFreeDiskSpace()
       .then(function (success) {
         console.log("file directory success");
