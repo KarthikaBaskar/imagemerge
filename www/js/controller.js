@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
 
 
 	  //$scope.pdfUrl = "http://n2.transparent.sg:3000/assets/pdfs/loos/1443509865855_23loo.pdf";
-    $scope.pdfUrl = "img/angularjs_tutorial.pdf";
+    $scope.pdfUrl = "img/ERA-Letter of Intent (ERA Serving Tenant).pdf";
        pdfDelegate
         .$getByHandle('my-pdf-container')
         .load($scope.pdfUrl);
