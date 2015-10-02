@@ -33,14 +33,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers','pdf','ng
 })
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
- 
+
     .state('app', {
     url: "/app",
     templateUrl: "index.html",
     controller: 'canvasController'
   })
- 
- 
+
+
   .state('app.browse', {
     url: "/browse",
     views: {
@@ -50,6 +50,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers','pdf','ng
       }
     }
   })
- 
+
+  .state('app.browsefiles', {
+    url: "/browsefiles",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/browsefiles.html",
+        controller: 'BrowseFilesCtrl'
+      }
+    }
+  })
+
   $urlRouterProvider.otherwise('/app/browse');
 });

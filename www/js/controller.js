@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
 	//         if(event.gesture.touches.length>0){
 	//         tt = event.gesture.touches[0];
 	//         tap.x = tt.clientX || tt.pageX || tt.screenX ||0;
-	//         tap.y = tt.clientY || tt.pageY || tt.screenY ||0;  
+	//         tap.y = tt.clientY || tt.pageY || tt.screenY ||0;
 	//         }
 	//  tap.x = tap.x - canvasPosition.x;
 	//  tap.y = tap.y - canvasPosition.y;
@@ -46,8 +46,8 @@ angular.module('starter.controllers', [])
      });
      confirmPopup.then(function(res) {
        if(res) {
-				
-	
+
+
     var img2 = document.getElementById('signatureCanvas');
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
@@ -86,7 +86,7 @@ angular.module('starter.controllers', [])
          console.log('You are not sure');
        }
      });
-   
+
 
 
 
@@ -136,7 +136,7 @@ angular.module('starter.controllers', [])
 	    }else{ // toggle zoom out
 	     $ionicScrollDelegate.zoomTo(1, true);
 	      zoomed = !zoomed;
-	    }    
+	    }
 	  }
 
 	 $scope.fileupload = function(){
@@ -194,21 +194,21 @@ angular.module('starter.controllers', [])
 .controller('BrowseCtrl', function($window, $ionicPlatform, $rootScope, $scope, $ionicScrollDelegate, AudioSvc, $ionicModal) {
 	console.log("Brose Controller");
     $scope.files = [];
- 
+
     // $ionicModal.fromTemplateUrl('templates/player.html', {
     //   scope: $scope
     // }).then(function(modal) {
     //   $scope.modal = modal;
     // });
- 
+
     // $rootScope.hidePlayer = function() {
     //   $scope.modal.hide();
     // };
- 
+
     // $rootScope.player = function() {
     //   $scope.modal.show();
     // };
- 
+
     $ionicPlatform.ready(function() {
       /*function for file transfer*/
       console.log(cordova.file);
@@ -227,9 +227,9 @@ angular.module('starter.controllers', [])
       $rootScope.show('Accessing Filesystem.. Please wait');
       $window.requestFileSystem($window.LocalFileSystem.PERSISTENT, 0, function(fs) {
           //console.log("fs", fs);
- 
+
           var directoryReader = fs.root.createReader();
- 
+
           directoryReader.readEntries(function(entries) {
               var arr = [];
               processEntries(entries, arr); // arr is pass by refrence
@@ -243,9 +243,9 @@ angular.module('starter.controllers', [])
         function(error) {
           console.log(error);
         });
- 
+
       $scope.showSubDirs = function(file) {
- 
+
         if (file.isDirectory || file.isUpNav) {
           if (file.isUpNav) {
             processFile(file.nativeURL.replace(file.actualName + '/', ''));
@@ -254,24 +254,24 @@ angular.module('starter.controllers', [])
           }
         } else {
           // if (hasExtension(file.name)) {
-            
+
           // } else {
           //   $rootScope.toggle('Oops! We cannot play this file :/', 3000);
           // }
- 
+
         }
- 
+
       }
- 
+
       function fsResolver(url, callback) {
         $window.resolveLocalFileSystemURL(url, callback);
       }
- 
+
       function processFile(url) {
         fsResolver(url, function(fs) {
           //console.log(fs);
           var directoryReader = fs.createReader();
- 
+
           directoryReader.readEntries(function(entries) {
               if (entries.length > 0) {
                 var arr = [];
@@ -291,7 +291,7 @@ angular.module('starter.controllers', [])
                 $scope.$apply(function() {
                   $scope.files = arr;
                 });
- 
+
                 $ionicScrollDelegate.scrollTop();
               } else {
                 $rootScope.toggle(fs.name + ' folder is empty!', 2000);
@@ -302,17 +302,17 @@ angular.module('starter.controllers', [])
             });
         });
       }
- 
+
       // function hasExtension(fileName) {
       //   var exts = ['.mp3', '.m4a', '.ogg', '.mp4', '.aac'];
       //   return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
       // }
- 
+
       function processEntries(entries, arr) {
- 
+
         for (var i = 0; i < entries.length; i++) {
           var e = entries[i];
- 
+
           // do not push/show hidden files or folders
           if (e.name.indexOf('.') !== 0) {
             arr.push({
@@ -327,7 +327,11 @@ angular.module('starter.controllers', [])
         }
         return arr;
       }
- 
+
     });
   }
 )
+.controller('BrowseFilesCtrl', function($window, $ionicPlatform, $rootScope, $scope, $ionicScrollDelegate, AudioSvc, $ionicModal) {
+
+	alert('sas');
+})
